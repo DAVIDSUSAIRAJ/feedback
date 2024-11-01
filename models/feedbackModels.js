@@ -3,11 +3,11 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const FeedbackSchema = new Schema({
-    name:{
+    title:{
      type:String,
      require:true,
     },
-    feedback:{
+    description:{
         type:String,
 
     }

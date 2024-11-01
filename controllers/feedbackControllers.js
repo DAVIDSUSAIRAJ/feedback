@@ -5,9 +5,8 @@ const feedbackModel = require("../models/feedbackModels");
 //create a task, to post
 const createTask = async (req,res)=>{
     try {
-        const {name,feedback} = req.body;
-        console.log(name,feedback,"kkkk")
-        const task = await feedbackModel.create({ name, feedback });
+        const {title,description} = req.body;
+        const task = await feedbackModel.create({ title, description });
         res.status(200).json(task);
     } catch (error) {
         res.status(400).json({message:error.message});

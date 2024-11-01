@@ -19,4 +19,4 @@ mongoose.connect(process.env.MONGODB_URI).then(()=>{
 }).catch((error)=>console.log(error))
 
 
-app.use("/api/feedbacks",taskRoute)
+app.use("/CRUD/cruds",taskRoute)
