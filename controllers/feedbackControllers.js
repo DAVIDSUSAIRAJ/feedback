@@ -74,5 +74,40 @@ const deleteSingleTask = async (req, res)=>{
     
 }
 
-module.exports = {createTask,getTasks,getSingleTask,updateSingleTask,deleteSingleTask}
+
+const createTasks = async (req, res) => {
+  try {
+      const tasks = req.body; // Array of task objects
+      const createdTasks = await feedbackModel.insertMany(tasks); // Bulk insert
+      res.status(200).json(createdTasks);
+  } catch (error) {
+      res.status(400).json({ message: error.message });
+  }
+};
+const updateTasks = async (req, res) => {
+  try {
+      const tasks = req.body; // Array of task objects with _id for each task
+      const updatePromises = tasks.map(task =>
+          feedbackModel.findByIdAndUpdate(task._id, task, { new: true })
+      );
+      const updatedTasks = await Promise.all(updatePromises);
+      res.status(200).json(updatedTasks);
+  } catch (error) {
+      res.status(400).json({ error: error.message });
+  }
+};
+
+const deleteTasks = async (req, res) => {
+  try {
+      const ids = req.body; // Array of IDs to delete
+      const deletedTasks = await feedbackModel.deleteMany({ _id: { $in: ids } });
+      res.status(200).json(deletedTasks);
+  } catch (error) {
+      res.status(400).json({ error: error.message });
+  }
+};
+
+
+
+module.exports = {createTask,getTasks,getSingleTask,updateSingleTask,deleteSingleTask,createTasks,updateTasks,deleteTasks}
 
