@@ -10,8 +10,8 @@ app.use((req,res,next)=>{
 })
 
 app.use(express.json())
-app.use(cors())
-
+app.use(cors())//browser and server  connection; for that reson
+app.use("/CRUD/cruds",taskRoute)
 mongoose.connect(process.env.MONGODB_URI).then(()=>{
     app.listen(process.env.PORT,()=>{
         console.log("server is running and mongodb connected");
@@ -19,4 +19,6 @@ mongoose.connect(process.env.MONGODB_URI).then(()=>{
 }).catch((error)=>console.log(error))
 
 
-app.use("/CRUD/cruds",taskRoute)
+
+//CRUD IS A DATABASE NAME
+//cruds is collection name
