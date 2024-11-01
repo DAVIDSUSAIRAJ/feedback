@@ -3,9 +3,9 @@ const express = require("express");
 const  router = express.Router();
 
 const {createTask,getTasks,getSingleTask,updateSingleTask,deleteSingleTask,createTasks,updateTasks,deleteTasks} = require("../controllers/feedbackControllers");
-router.post("/",createTask);
-router.get("/",getTasks)
-// router.get("/:id",getSingleTask)
+// router.post("/",createTask);
+router.get("/bulk",getTasks)
+router.get("/bulk/:id",getSingleTask)
 // router.patch("/:id",updateSingleTask)
 // router.delete("/:id",deleteSingleTask)
 
