@@ -10,12 +10,15 @@ const FeedbackSchema = new Schema({
     description:{
         type:String,
 
+    },
+    id:{
+        type:Number,
     }
 
 },
-{
-    timestamps:true,
-}
+// {
+//     timestamps:true,
+// }
 
 );
 

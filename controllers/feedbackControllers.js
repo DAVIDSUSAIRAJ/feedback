@@ -48,7 +48,7 @@ const updateSingleTask = async (req, res)=>{
         return res.status(400).json({error:"Invalid id"});
       }
       const singleUpdateTask = await feedbackModel.findByIdAndUpdate({
-        _id:id,
+        id:id,
       },
       {
          ...req.body,
@@ -88,7 +88,7 @@ const updateTasks = async (req, res) => {
   try {
       const tasks = req.body; // Array of task objects with _id for each task
       const updatePromises = tasks.map(task =>
-          feedbackModel.findByIdAndUpdate(task._id, task, { new: true })
+          feedbackModel.findByIdAndUpdate(task.id, task, { new: true })
       );
       const updatedTasks = await Promise.all(updatePromises);
       res.status(200).json(updatedTasks);
@@ -100,7 +100,7 @@ const updateTasks = async (req, res) => {
 const deleteTasks = async (req, res) => {
   try {
       const ids = req.body; // Array of IDs to delete
-      const deletedTasks = await feedbackModel.deleteMany({ _id: { $in: ids } });
+      const deletedTasks = await feedbackModel.deleteMany({ id: { $in: ids } });
       res.status(200).json(deletedTasks);
   } catch (error) {
       res.status(400).json({ error: error.message });
