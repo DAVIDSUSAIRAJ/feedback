@@ -88,7 +88,7 @@ const updateTasks = async (req, res) => {
   try {
       const tasks = req.body; // Array of task objects with _id for each task
       const updatePromises = tasks.map(task =>
-          feedbackModel.findByIdAndUpdate(task.id, task, { new: true })
+        feedbackModel.findOneAndUpdate({ id: task.id }, task, { new: true }) // Query by `id`
       );
       const updatedTasks = await Promise.all(updatePromises);
       res.status(200).json(updatedTasks);
